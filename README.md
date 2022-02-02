@@ -3,13 +3,8 @@ Create a web API with ASP.NET Core Controllers
 
 This is my first web API application using ASP.NET Core Controllers with .NET 6.0 and C#.
 
-Tech Stack: 
-  Visual Studio Professional
-  .NET 6.0
-  C#
-  HTTPREPL
-  Command Prompt
-  
+Tech Stack: Visual Studio Professional, .NET 6.0, C#, HTTPREPL, Command Prompt
+
 The data store used is in-memory cache.
 I have implemented CRUD operations using GET | POST | PUT | DELETE http verbs to view, create, update and delete pizza records.
 I have tested the web API action methods from the command prompt using HTTPREPL.
