@@ -1,0 +1,92 @@
+Build and start the web API by running the following command:
+	dotnet run
+
+If you opened a new terminal, connect to our web API by running the following command:
+	httprepl https://localhost:{PORT}
+
+Alternatively, run the following command at any time while the HttpRepl is running:
+	(Disconnected)> connect https://localhost:{PORT}
+
+Navigate to the Pizza endpoint by running the following command:
+	cd Pizza
+
+Run the following command to see the new actions on the Pizza API:
+	ls
+
+The preceding command will output available APIs available for the Pizza endpoint:
+	https://localhost:{PORT}/Pizza> ls
+	.      [GET|POST]
+	..     []
+	{id}   [GET|PUT|DELETE]
+
+Make a POST request to add a new pizza in the HttpRepl by using the following command:
+	post -c "{"name":"Hawaii", "isGlutenFree":false}"
+
+The following command will make a POST request to add the new pizza to our inventory and then will return a list of all pizza back:
+	HTTP/1.1 201 Created
+	Content-Type: application/json; charset=utf-8
+	Date: Fri, 02 Apr 2021 23:23:09 GMT
+	Location: https://localhost:{PORT}/Pizza?id=3
+	Server: Kestrel
+	Transfer-Encoding: chunked
+
+	{
+		"id": 3,
+		"name": "Hawaii",
+		"isGlutenFree": false
+	}
+	
+Let's update the new Hawaii pizza to a Hawaiian pizza with a PUT request with the following command:
+	put 3 -c  "{"id": 3, "name":"Hawaiian", "isGlutenFree":false}"
+	
+This will return the following output that it was successful:
+	HTTP/1.1 204 No Content
+	Date: Fri, 02 Apr 2021 23:23:55 GMT
+	Server: Kestrel
+
+To verify that the pizza was updated, we can rerun the GET action with the following command:
+	get 3
+	
+This will return the newly updated pizza:
+	HTTP/1.1 200 OK
+	Content-Type: application/json; charset=utf-8
+	Date: Fri, 02 Apr 2021 23:27:37 GMT
+	Server: Kestrel
+	Transfer-Encoding: chunked
+
+	{
+		"id": 3,
+		"name": "Hawaiian",
+		"isGlutenFree": false
+	}
+
+Our API can also delete the newly created pizza with the DELETE action by running the following command:
+	delete 3
+
+This will return a 204 No Content for success:
+	HTTP/1.1 204 No Content
+	Date: Fri, 02 Apr 2021 23:30:04 GMT
+	Server: Kestrel
+	
+To verify that the pizza was removed, we can rerun the GET action with the following command:
+	get
+
+This will return our original pizzas as results:
+	HTTP/1.1 200 OK
+	Content-Type: application/json; charset=utf-8
+	Date: Fri, 02 Apr 2021 23:31:15 GMT
+	Server: Kestrel
+	Transfer-Encoding: chunked
+
+	[
+		{
+			"id": 1,
+			"name": "Classic Italian",
+			"isGlutenFree": false
+		},
+		{
+			"id": 2,
+			"name": "Veggie",
+			"isGlutenFree": true
+		}
+	]
